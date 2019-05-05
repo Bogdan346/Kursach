@@ -1,20 +1,29 @@
 package sample;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import static javafx.collections.FXCollections.*;
 
 
 public class Controller implements Initializable {
@@ -28,11 +37,35 @@ public class Controller implements Initializable {
     public ResourceBundle resourcesBundle;
 
 
+    //ComboBox
+    @FXML
+    public ComboBox<String> searchSystemBox;
+
+
+    //ComboBox
+
+
     //Button
     @FXML
     public Button backButton;// публічні змінні типу Button, які
     @FXML
     public Button forwardButton;
+    @FXML
+    public Button exportButton;
+
+
+    @FXML
+    public Label checkLink;
+    @FXML
+    public Button editButton;
+    @FXML
+    public Button saveButton;
+    @FXML
+    public Button importXLToDBButton;
+    @FXML
+    public Button searchButton;
+
+
     @FXML
     private Button addButton;
     @FXML
@@ -50,6 +83,7 @@ public class Controller implements Initializable {
     public TextField nameField;
     @FXML
     public TextField linkField;
+
 // TextField
 
     // TableView
@@ -80,17 +114,22 @@ public class Controller implements Initializable {
     public WebEngine engine;
     @FXML
     public String adrsLink;
-//Browser
+    //Browser
+
 
     /////////////////////////////////////////////*************************/////////////////////////////////////////////////
 //                                                    methods
 // Главный метод инициализации
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //Brawser
+
+
         engine = webView.getEngine();//получаем объект WebEngine из  WebView используя метод  getEngine()
-        engine.load(http + "www.google.com");
+
 //Brawser
+
 
         dc = (new DataBaseConnector());
 
@@ -106,38 +145,33 @@ public class Controller implements Initializable {
         tableView.setTooltip(toolTipe("Here located youre data"));
         addButton.setDisable(true);
         deleteButton.setDisable(true);
+        exportButton.setDisable(true);
+        saveButton.setDisable(true);
 
 //Tooltip
 
-//Listiners
 
+//Listiners
 
         addButton.setOnAction(event -> {
             addAction();
-        loadDataFromDatabaseToTableView();
-    });
-
+            loadDataFromDatabaseToTableView();
+        });
         deleteButton.setOnAction(event -> {
             deleteAction();
 
         });
-
         refreshButton.setOnAction(event -> {
             addButton.setDisable(false);
             deleteButton.setDisable(false);
             refreshButton.setDisable(true);
+            exportButton.setDisable(false);
             loadDataFromDatabaseToTableView();
 
 
         });
-
         goButton.setOnAction(event -> {
             go();
-
-        });
-
-        tableView.setOnMouseClicked(event -> {
-            getAddres();
 
         });
 
@@ -145,14 +179,63 @@ public class Controller implements Initializable {
             goBack();
 
         });
-
         forwardButton.setOnAction(event -> {
             goForward();
 
         });
-//Listiners
+        tableView.setOnMouseClicked(event -> {
+            clickOnAddres(event);
+        });
+        exportButton.setOnAction(event -> {
+            try {
+                exportToExcelFile();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        editButton.setOnAction(event -> {
+            getChangingData();
+            saveButton.setDisable(false);
+        });
+        saveButton.setOnAction(event -> {
+            deleteAction();
+            addAction();
+            loadDataFromDatabaseToTableView();
+            saveButton.setDisable(true);
+
+        });
+
+        searchField.setOnKeyReleased(event -> {
+            searchName();
+        });
+
+        //Choose Search System
+        searchSystemBox.setItems(FXCollections.<String>observableArrayList("Google", "Duckduckgo", "Yippy", "Disconnect Search"));
+        String SSystems[] = new String[]{"google.com", "duckduckgo.com", "yippy.com", "search.disconnect.me"};
+        searchSystemBox.setValue("Google");
+        String startSearchSystemValue = "google.com";
+        engine.load(http + startSearchSystemValue);
+        searchSystemBox.getSelectionModel().selectedIndexProperty().addListener(
+                (ObservableValue<? extends Number> ov, Number odl_v, Number newVal) -> {
+
+                    String comboBoxSearchSystemValue = SSystems[newVal.intValue()];
+                    engine.load(http + comboBoxSearchSystemValue);
+                }
+        );
+        //Choose Search System
+
+
 
     }
+
+
+//Listiners
+
 
     public void deleteAction() {
         Data d = tableView.getSelectionModel().getSelectedItem();
@@ -207,7 +290,7 @@ public class Controller implements Initializable {
         try {
 
             Connection conn = dc.getDbConnection();
-            data = FXCollections.observableArrayList();
+            data = observableArrayList();
 
             ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM mydatabase;");
 
@@ -299,7 +382,93 @@ public class Controller implements Initializable {
         Tooltip tooltip = new Tooltip(text);
         return tooltip;
     }
+
+    public void clickOnAddres(MouseEvent click) {
+        if (click.getClickCount() == 2) {
+            getAddres();
+            go();
+        } else {
+            getAddres();
+        }
+    }
+
+    public void exportToExcelFile() throws SQLException, ClassNotFoundException, IOException {
+
+        String sql = "SELECT * FROM mydatabase";
+        Connection connection = dc.getDbConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet rs = preparedStatement.executeQuery();
+        XSSFWorkbook wd = new XSSFWorkbook();
+        XSSFSheet sheet = wd.createSheet("User Data");
+        XSSFRow header = sheet.createRow(0);
+        header.createCell(0).setCellValue("Name:");
+        header.createCell(1).setCellValue("Link:");
+
+        sheet.autoSizeColumn(0);
+        sheet.autoSizeColumn(1);
+        sheet.setColumnWidth(0, 256 * 25);
+        sheet.setColumnWidth(1, 256 * 25);
+        int index = 1;
+        while (rs.next()) {
+            XSSFRow row = sheet.createRow(index);
+            row.createCell(0).setCellValue(rs.getString("Name"));
+            row.createCell(1).setCellValue(rs.getString("Link"));
+            index++;
+        }
+
+
+        FileOutputStream fileOutputStream = new FileOutputStream("UserData.xlsx");
+        wd.write(fileOutputStream);
+        fileOutputStream.close();
+        warningDialogs("title ", "Exele was created");
+        preparedStatement.close();
+        rs.close();
+    }
+
+
+    public void getChangingData() {
+        Data links = tableView.getSelectionModel().getSelectedItem();
+        Data names = tableView.getSelectionModel().getSelectedItem();
+        String lin = links.getLink();
+        String nam = names.getName();
+        nameField.setText(nam);
+        linkField.setText(lin);
+    }
+
+
+    public void searchName() {
+        if (searchField.getText().equals(" ")) {
+            loadDataFromDatabaseToTableView();
+        } else {
+            data.clear();
+            String sql = "SELECT * FROM mydatabase where Name LIKE '%" + searchField.getText() + "%'";
+            try {
+                Connection connection = dc.getDbConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                ResultSet rs = preparedStatement.executeQuery();
+                while (rs.next()) {
+                    data.add(new Data(rs.getString("Name"), rs.getString("Link"), rs.getString("idmydatabase")));
+                }
+                tableView.setItems(data);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 }
+
+
+
+
+
+
+
+
 
 
 

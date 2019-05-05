@@ -13,8 +13,8 @@ public class DataBaseConnector {
     public Connection getDbConnection()
             throws ClassNotFoundException, SQLException {
         String dbName = "root";
-        String dbPass = "mwg3936";
-        String connectionUrl = "jdbc:mysql://localhost:3306/mydatabase?serverTimezone=UTC&useSSL=false";
+        String dbPass = "57002488";
+        String connectionUrl = "jdbc:mysql://127.0.0.1:3306/mydatabase?serverTimezone=UTC&useSSL=false";
         Class.forName("com.mysql.cj.jdbc.Driver");
         dbConnection = DriverManager.getConnection(connectionUrl, dbName, dbPass);
         return dbConnection;
@@ -22,7 +22,7 @@ public class DataBaseConnector {
     }
 
     ///  метод добавления инф. в БД
-    public void addElementToDB(String name, String link) {
+    public void addElementToDB(String name, String link ) {
 
 
         String sql = "INSERT INTO " + Const.MYTABLE + "(" + Const.MYTABLE_NAME + "," + Const.MYTABLE_LINK + ")" + "VALUES (?,?)";//SQL
