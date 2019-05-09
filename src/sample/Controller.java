@@ -64,6 +64,8 @@ public class Controller implements Initializable {
     public Button importXLToDBButton;
     @FXML
     public Button searchButton;
+    @FXML
+    public TitledPane titledPane;
 
 
     @FXML
@@ -128,6 +130,7 @@ public class Controller implements Initializable {
 
         engine = webView.getEngine();//получаем объект WebEngine из  WebView используя метод  getEngine()
 
+
 //Brawser
 
 
@@ -147,6 +150,8 @@ public class Controller implements Initializable {
         deleteButton.setDisable(true);
         exportButton.setDisable(true);
         saveButton.setDisable(true);
+//        titledPane.setDisable(true);
+//        searchSystemBox.setMaxSize(125,25);
 
 //Tooltip
 
@@ -214,9 +219,11 @@ public class Controller implements Initializable {
             searchName();
         });
 
+
+
         //Choose Search System
-        searchSystemBox.setItems(FXCollections.<String>observableArrayList("Google", "Duckduckgo", "Yippy", "Disconnect Search"));
-        String SSystems[] = new String[]{"google.com", "duckduckgo.com", "yippy.com", "search.disconnect.me"};
+        searchSystemBox.setItems(FXCollections.<String>observableArrayList("Google", "Duckduckgo", "Yippy"));
+        String SSystems[] = new String[]{"google.com", "duckduckgo.com", "yippy.com"};
         searchSystemBox.setValue("Google");
         String startSearchSystemValue = "google.com";
         engine.load(http + startSearchSystemValue);

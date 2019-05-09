@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane minHeight="530.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: 10; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <children>
+      <AnchorPane layoutX="-8.0" layoutY="39.0" prefHeight="528.0" prefWidth="800.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="39.0">
+         <children>
+            <WebView fx:id="webView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+              <ComboBox fx:id="searchSystemBox" layoutX="116.0" layoutY="227.0" prefHeight="37.0" prefWidth="168.0" promptText=" " />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="37.0" prefWidth="881.0" style="-fx-background-color: #E8E8E8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+                <Button fx:id="backButton" layoutX="5.0" layoutY="7.0" mnemonicParsing="false" text="&lt;-" />
+                <Button fx:id="forwardButton" layoutX="40.0" layoutY="7.0" mnemonicParsing="false" text="-&gt;" />
+                <TextField fx:id="addresBar" layoutX="112.0" layoutY="6.0" prefHeight="23.0" prefWidth="747.0" promptText="Input here full address" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="22.0" />
+                <Button fx:id="goButton" defaultButton="true" layoutX="74.0" layoutY="7.0" mnemonicParsing="false" text="GO" />
+         </children>
+      </AnchorPane>
+      <TitledPane fx:id="titledPane" expanded="false" layoutX="2.0" layoutY="394.0" opacity="0.9" prefHeight="206.0" prefWidth="804.0" rotate="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0">
+         <content>
+            <Pane layoutX="19.0" layoutY="2.0" prefHeight="355.0" prefWidth="833.0" rotate="180.0">
+               <children>
+                  <TableView fx:id="tableView" layoutX="76.0" layoutY="23.0" prefHeight="135.0" prefWidth="650.0" style="-fx-border-color: #9F9F9F;">
+                     <columns>
+                        <TableColumn fx:id="tableViewColumName" minWidth="0.0" prefWidth="325.0" text="Name" />
+                        <TableColumn fx:id="tableViewColumLink" minWidth="0.0" prefWidth="328.0" text="Link" />
+                     </columns>
+                  </TableView>
+                  <Pane layoutX="76.0" layoutY="144.0" prefHeight="37.0" prefWidth="650.0" style="-fx-background-color: #E9E9E9; -fx-border-color: #9F9F9F;" styleClass="backPane">
+                     <children>
+                        <TextField fx:id="nameField" layoutX="11.0" layoutY="5.0" prefHeight="27.0" prefWidth="300.0" promptText="Name" style="-fx-border-color: #9F9F9F;">
+                           <opaqueInsets>
+                              <Insets left="10.0" />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField fx:id="linkField" layoutX="336.0" layoutY="5.0" prefHeight="27.0" prefWidth="300.0" promptText="Link" style="-fx-border-color: #9F9F9F;" />
+                        <Separator layoutX="322.0" orientation="VERTICAL" prefHeight="37.0" prefWidth="6.0" />
+                     </children>
+                     <effect>
+                        <DropShadow height="3.0" radius="1.0" width="3.0" />
+                     </effect>
+                  </Pane>
+                  <Button id="addButton" fx:id="addButton" layoutX="15.0" layoutY="132.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                     <effect>
+                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
+                     </effect>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView id="addImg" fitHeight="25.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/add.png" />
+                           </image>
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="deleteButton" layoutX="15.0" layoutY="84.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                     <effect>
+                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
+                     </effect>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="adButt" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/del2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="refreshButton" layoutX="15.0" layoutY="35.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                     <effect>
+                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
+                     </effect>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="adButt" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/refresh.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="saveButton" layoutX="741.0" layoutY="132.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                     <effect>
+                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
+                     </effect>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="adButt" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/save.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="editButton" layoutX="741.0" layoutY="84.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                     <effect>
+                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
+                     </effect>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="adButt" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/edit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="exportButton" layoutX="741.0" layoutY="36.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                     <effect>
+                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
+                     </effect>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="adButt" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/Excel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="searchField" layoutX="76.0" layoutY="-1.0" onKeyReleased="#searchName" prefHeight="25.0" prefWidth="650.0" promptText="Search entry" />
+               </children>
+            </Pane>
+         </content>
+      </TitledPane>
+    </children>
+    <cursor>
+        <Cursor fx:constant="DEFAULT" />
+    </cursor>
+   <stylesheets>
+      <URL value="@my.css" />
+      <URL value="@my.css" />
+   </stylesheets>
+</AnchorPane>

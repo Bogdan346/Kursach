@@ -1,10 +1,51 @@
 .button{
-    -fx-color :#d8d8d8;
+    -fx-background-color: #E2E2E2;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
 
-    box-shadow: 0 3px 20px rgba(0,0,0,.25),
-    inset 0 2px 0 rgba(255,255,255,.6),
-    0 2px 0 rgba(0,0,0,.1),
-    inset 0 0 20px rgba(0,0,0,.1);
+    -fx-border-color:  #3D3D6B;
+    -fx-border-width: 1px;
+    -fx-border-radius:10%;
+    -fx-background-radius: 10%;
 }
 
 
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+     -fx-size: 35;
+     -fx-border-width: 0 0 1 0;
+     -fx-background-color: transparent;
+     -fx-border-color:
+             transparent
+             transparent
+             derive(-fx-base, 80%)
+             transparent;
+     -fx-border-insets: 0 10 1 0;
+ }
+
+.table-view .column-header .label {
+    -fx-font-size: 18pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+.text-field {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+ .panel{
+     -fx-background-color:  #1B1B1B;
+     -fx-border-color: #000000;
+ }
+ /*https://code.makery.ch/ru/library/javafx-tutorial/part4/*/
