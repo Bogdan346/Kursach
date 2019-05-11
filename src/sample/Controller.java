@@ -19,9 +19,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.apache.poi.xssf.usermodel.XSSFRow;
+//import org.apache.poi.xssf.usermodel.XSSFSheet;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import static javafx.collections.FXCollections.*;
 
@@ -191,17 +191,17 @@ public class Controller implements Initializable {
         tableView.setOnMouseClicked(event -> {
             clickOnAddres(event);
         });
-        exportButton.setOnAction(event -> {
-            try {
-                exportToExcelFile();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+//        exportButton.setOnAction(event -> {
+//            try {
+//                exportToExcelFile();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
 
         editButton.setOnAction(event -> {
             getChangingData();
@@ -223,9 +223,9 @@ public class Controller implements Initializable {
 
         //Choose Search System
         searchSystemBox.setItems(FXCollections.<String>observableArrayList("Google", "Duckduckgo", "Yippy"));
-        String SSystems[] = new String[]{"google.com", "duckduckgo.com", "yippy.com"};
+        String SSystems[] = new String[]{"google.com/?hl=en", "duckduckgo.com", "yippy.com"};
         searchSystemBox.setValue("Google");
-        String startSearchSystemValue = "google.com";
+        String startSearchSystemValue = "duckduckgo.com";
         engine.load(http + startSearchSystemValue);
         searchSystemBox.getSelectionModel().selectedIndexProperty().addListener(
                 (ObservableValue<? extends Number> ov, Number odl_v, Number newVal) -> {
@@ -399,38 +399,38 @@ public class Controller implements Initializable {
         }
     }
 
-    public void exportToExcelFile() throws SQLException, ClassNotFoundException, IOException {
-
-        String sql = "SELECT * FROM mydatabase";
-        Connection connection = dc.getDbConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        ResultSet rs = preparedStatement.executeQuery();
-        XSSFWorkbook wd = new XSSFWorkbook();
-        XSSFSheet sheet = wd.createSheet("User Data");
-        XSSFRow header = sheet.createRow(0);
-        header.createCell(0).setCellValue("Name:");
-        header.createCell(1).setCellValue("Link:");
-
-        sheet.autoSizeColumn(0);
-        sheet.autoSizeColumn(1);
-        sheet.setColumnWidth(0, 256 * 25);
-        sheet.setColumnWidth(1, 256 * 25);
-        int index = 1;
-        while (rs.next()) {
-            XSSFRow row = sheet.createRow(index);
-            row.createCell(0).setCellValue(rs.getString("Name"));
-            row.createCell(1).setCellValue(rs.getString("Link"));
-            index++;
-        }
-
-
-        FileOutputStream fileOutputStream = new FileOutputStream("UserData.xlsx");
-        wd.write(fileOutputStream);
-        fileOutputStream.close();
-        warningDialogs("title ", "Exele was created");
-        preparedStatement.close();
-        rs.close();
-    }
+//    public void exportToExcelFile() throws SQLException, ClassNotFoundException, IOException {
+//
+//        String sql = "SELECT * FROM mydatabase";
+//        Connection connection = dc.getDbConnection();
+//        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//        ResultSet rs = preparedStatement.executeQuery();
+//        XSSFWorkbook wd = new XSSFWorkbook();
+//        XSSFSheet sheet = wd.createSheet("User Data");
+//        XSSFRow header = sheet.createRow(0);
+//        header.createCell(0).setCellValue("Name:");
+//        header.createCell(1).setCellValue("Link:");
+//
+//        sheet.autoSizeColumn(0);
+//        sheet.autoSizeColumn(1);
+//        sheet.setColumnWidth(0, 256 * 25);
+//        sheet.setColumnWidth(1, 256 * 25);
+//        int index = 1;
+//        while (rs.next()) {
+//            XSSFRow row = sheet.createRow(index);
+//            row.createCell(0).setCellValue(rs.getString("Name"));
+//            row.createCell(1).setCellValue(rs.getString("Link"));
+//            index++;
+//        }
+//
+//
+//        FileOutputStream fileOutputStream = new FileOutputStream("UserData.xlsx");
+//        wd.write(fileOutputStream);
+//        fileOutputStream.close();
+//        warningDialogs("title ", "Exele was created");
+//        preparedStatement.close();
+//        rs.close();
+//    }
 
 
     public void getChangingData() {

@@ -10,7 +10,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,15 +18,15 @@
 
 <AnchorPane minHeight="530.0" prefHeight="600.0" prefWidth="800.0" style=": ; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
-      <AnchorPane layoutX="-8.0" layoutY="40.0" prefHeight="527.0" prefWidth="798.0" styleClass="mainColor" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="40.0">
+      <AnchorPane layoutX="-8.0" layoutY="40.0" prefHeight="527.0" prefWidth="798.0" style=": ;" styleClass="mainColor" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="40.0">
          <children>
             <WebView fx:id="webView" layoutY="2.0" prefHeight="527.0" prefWidth="798.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0" />
-              <ComboBox fx:id="searchSystemBox" layoutX="118.0" layoutY="241.0" prefHeight="25.0" prefWidth="130.0" promptText=" " />
+              <ComboBox fx:id="searchSystemBox" layoutX="325.0" layoutY="304.0" prefHeight="25.0" prefWidth="130.0" promptText=" " visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="38.0" prefWidth="881.0" styleClass="panel" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane prefHeight="38.0" prefWidth="880.0" styleClass="panel" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-                <Button fx:id="backButton" layoutX="2.0" layoutY="4.0" mnemonicParsing="false">
+                <Button fx:id="backButton" layoutX="2.0" layoutY="5.0" mnemonicParsing="false">
                <graphic>
                   <ImageView fitHeight="14.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -35,7 +34,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-                <Button fx:id="forwardButton" layoutX="39.0" layoutY="4.0" mnemonicParsing="false">
+                <Button fx:id="forwardButton" layoutX="39.0" layoutY="5.0" mnemonicParsing="false">
                <graphic>
                   <ImageView fitHeight="14.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -43,18 +42,18 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-                <TextField fx:id="addresBar" layoutX="117.0" layoutY="4.0" prefHeight="25.0" prefWidth="659.0" promptText="Input here full address" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="24.0" />
+                <TextField fx:id="addresBar" layoutX="120.0" layoutY="3.0" prefHeight="31.0" prefWidth="665.0" promptText="Input here full address" styleClass="fieldT" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="16.0" />
                 <Button fx:id="goButton" defaultButton="true" layoutX="76.0" layoutY="4.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="38.0" text="GO">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font></Button>
          </children>
       </AnchorPane>
-      <TitledPane fx:id="titledPane" layoutX="-2.0" layoutY="380.0" prefHeight="220.0" prefWidth="803.0" rotate="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="0.0">
+      <TitledPane fx:id="titledPane" layoutX="-2.0" layoutY="380.0" prefHeight="220.0" prefWidth="803.0" rotate="180.0" style=": ;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="0.0">
          <content>
-            <AnchorPane prefHeight="198.0" prefWidth="801.0" rotate="180.0" styleClass="panel">
+            <AnchorPane prefHeight="198.0" prefWidth="800.0" rotate="180.0" styleClass="panel">
                <children>
-                  <TableView fx:id="tableView" layoutX="75.0" layoutY="23.0" prefHeight="141.0" prefWidth="651.0" style=": ;" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="73.0">
+                  <TableView fx:id="tableView" layoutX="75.0" layoutY="23.0" prefHeight="141.0" prefWidth="650.0" style=": ;" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="74.0">
                      <columns>
                         <TableColumn fx:id="tableViewColumName" minWidth="0.0" prefWidth="328.0" text="Name" />
                         <TableColumn fx:id="tableViewColumLink" minWidth="0.0" prefWidth="325.0" styleClass="table" text="Link" />
@@ -65,18 +64,15 @@
                   </TableView>
                   <AnchorPane layoutX="75.0" layoutY="163.0" prefHeight="43.0" prefWidth="650.0" styleClass="panel" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="74.0">
                      <children>
-                        <TextField fx:id="nameField" layoutX="14.0" layoutY="6.0" prefHeight="28.0" prefWidth="312.0" promptText="Name" style=": ;" styleClass="field" AnchorPane.rightAnchor="329.0">
+                        <TextField fx:id="nameField" layoutX="10.0" layoutY="6.0" prefHeight="33.0" prefWidth="301.0" promptText="Name" style=": ;" styleClass="fieldT" AnchorPane.leftAnchor="9.0">
                            <opaqueInsets>
                               <Insets left="10.0" />
                            </opaqueInsets>
                         </TextField>
-                        <TextField fx:id="linkField" layoutX="328.0" layoutY="6.0" prefHeight="28.0" prefWidth="309.0" promptText="Link" style=": ;" AnchorPane.leftAnchor="328.0" />
+                        <TextField fx:id="linkField" layoutX="326.0" layoutY="6.0" prefHeight="31.0" prefWidth="308.0" promptText="Link" style=": ;" styleClass="fieldT" AnchorPane.rightAnchor="15.0" />
                      </children>
                   </AnchorPane>
                   <Button id=" " fx:id="addButton" layoutX="15.0" layoutY="35.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.leftAnchor="12.0">
-                     <effect>
-                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
-                     </effect>
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -92,9 +88,6 @@
                      </graphic>
                   </Button>
                   <Button fx:id="deleteButton" layoutX="15.0" layoutY="132.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style=": ;" AnchorPane.leftAnchor="12.0">
-                     <effect>
-                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
-                     </effect>
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -107,9 +100,6 @@
                      </graphic>
                   </Button>
                   <Button fx:id="refreshButton" layoutX="15.0" layoutY="84.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.leftAnchor="12.0">
-                     <effect>
-                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
-                     </effect>
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -121,10 +111,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="exportButton" layoutX="741.0" layoutY="84.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.rightAnchor="12.0">
-                     <effect>
-                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
-                     </effect>
+                  <Button fx:id="exportButton" layoutX="741.0" layoutY="132.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -136,10 +123,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="saveButton" layoutX="741.0" layoutY="132.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.rightAnchor="12.0">
-                     <effect>
-                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
-                     </effect>
+                  <Button fx:id="saveButton" layoutX="741.0" layoutY="36.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.rightAnchor="12.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -151,10 +135,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="editButton" layoutX="741.0" layoutY="36.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.rightAnchor="13.0">
-                     <effect>
-                        <DropShadow color="#afc7d7" height="12.0" radius="5.5" width="12.0" />
-                     </effect>
+                  <Button fx:id="editButton" layoutX="741.0" layoutY="84.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.rightAnchor="13.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -166,7 +147,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField fx:id="searchField" layoutX="75.0" layoutY="-1.0" onKeyReleased="#searchName" prefHeight="30.0" prefWidth="650.0" promptText="Search entry" styleClass="text-field" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="69.0" />
+                  <TextField fx:id="searchField" layoutX="76.0" onKeyReleased="#searchName" prefHeight="33.0" prefWidth="650.0" promptText="Search entry" styleClass="fieldT" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="74.0" />
                </children>
                <padding>
                   <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
